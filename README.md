@@ -7,14 +7,18 @@ Python module bindings for SORT algorithm (Simple, Online, and Realtime Tracking
 Before you can install the package, you need to install the following dependencies:
 
 ```bash
-sudo apt install libopencv-dev
-sudo apt install libeigen3-dev
+$ sudo apt install libopencv-dev
+$ sudo apt install libeigen3-dev
+```
+Make sure pip is upgraded to last version:
+```bash
+$ pip install pip --upgrade
 ```
 
 Then you can install the package using:
 
 ```bash
-$ pip install sort-python
+$ pip install sort-tracker
 ```
 
 or

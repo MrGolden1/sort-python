@@ -5,7 +5,6 @@
 #include <map>
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <boost/python/numpy.hpp>
 
 typedef struct
 {

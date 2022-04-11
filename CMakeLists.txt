@@ -4,6 +4,8 @@ project(sort-tracker)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 find_package(PythonExtensions REQUIRED)
+find_package(NumPy REQUIRED)
+include_directories(${NumPy_INCLUDE_DIRS})
 
 # Try to find OpenCV
 find_package(OpenCV REQUIRED)
