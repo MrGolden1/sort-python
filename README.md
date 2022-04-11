@@ -54,11 +54,11 @@ defaulf format is 0.
 
 ### `run`
 
-`run` method takes a list of bounding boxes and format, and then performs tracking.
+`run` method takes an array of bounding boxes and format, and then performs tracking.
 
 ```python
 # Input:
-#   bounding_boxes: list of bounding boxes [n, 4]
+#   bounding_boxes: a numpy array of bounding boxes [n, 4]
 #   format: format of bounding boxes (int)
 import numpy as np
 bounding_boxes = np.array([[10, 10, 20, 20], [30, 30, 40, 40]])
@@ -67,13 +67,13 @@ tracker.run(bounding_boxes, 0)
 
 ### `get_tracks`
 
-`get_tracks` method returns a list of tracks.
+`get_tracks` method returns a array of tracks.
 
 ```python
 # Input:
 #   format: format of bounding boxes (int)
 # Output:
-#   tracks: list of tracks [n, 5] where n is the number of tracks
+#   tracks: a numpy array of tracks [n, 5] where n is the number of tracks
 #       and 5 is (id, ..., ..., ..., ...) where id is the track id and ... is the bounding box in the specified format
 tracks = tracker.get_tracks(0)
 ```
