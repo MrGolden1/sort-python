@@ -41,7 +41,7 @@ tracker = sort.SORT(5,3)
 
 ## Methods:
 
-Two main methods are available named `run` and `get_tracks` and you can specify format of input and output as follows:
+Two main methods are available named `run` and `get_tracks` and you can specify format of input and output bounding boxes as follows:
 
 ```python
 # format (int):
