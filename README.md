@@ -32,7 +32,7 @@ $ pip install .
 import sort
 # Create a tracker with max_coast_cycles = 5 and min_hits = 3
 # Default values are max_coast_cycles = 3 and min_hits = 1
-tracker = sort.Sort(5,3)
+tracker = sort.SORT(5,3)
 ```
 
 ## Methods:

@@ -40,7 +40,7 @@ static char Py_SORT_doc[] = "Python wrapper for SORT";
  * Module Definition
  */
 static PyTypeObject Py_SORT_Type = {
-    PyVarObject_HEAD_INIT(NULL, 0) "Py_SORT", /* tp_name */
+    PyVarObject_HEAD_INIT(NULL, 0) "SORT", /* tp_name */
     sizeof(Py_SORT),                          /* tp_basicsize */
     0,                                        /* tp_itemsize */
     (destructor)Py_SORT_dealloc,              /* tp_dealloc */

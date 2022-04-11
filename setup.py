@@ -1,12 +1,15 @@
 from skbuild import setup
 
 setup(
-    name="tracker",
-    version="1.2.3",
+    name="sort-tracker",
+    version="1.0.0",
     description="SORT tracker",
     author='M.Ali Zarrinzade',
     author_email="ali.zarrinzadeh@gmail.com",
     packages=['sort'],
+    install_requires = [
+        'numpy',
+    ],
     # python_requires=">=3.7",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
