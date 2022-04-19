@@ -10,7 +10,7 @@
 class Tracker {
 public:
     Tracker();
-    Tracker(int max_coast_cycles);
+    Tracker(int max_coast_cycles, float iou_threshold);
     ~Tracker() = default;
 
     static float CalculateIou(const cv::Rect& det, const Track& track);
@@ -31,8 +31,7 @@ public:
     static void AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detection,
                                        std::map<int, Track>& tracks,
                                        std::map<int, cv::Rect>& matched,
-                                       std::vector<cv::Rect>& unmatched_det,
-                                       float iou_threshold = 0.3);
+                                       std::vector<cv::Rect>& unmatched_det);
 
     void Run(const std::vector<cv::Rect>& detections);
 
@@ -47,4 +46,5 @@ private:
     // Assigned ID for each bounding box
     int id_;
     int max_coast_cycles_;
+    static float iou_threshold_;
 };

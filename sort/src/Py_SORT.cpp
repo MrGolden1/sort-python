@@ -89,12 +89,13 @@ static int Py_SORT_init(Py_SORT *self, PyObject *args, PyObject *kwds)
 {
     int max_coast_cycles = 3;
     int min_hits = 1;
-    
-    if (!PyArg_ParseTuple(args, "|ii", &max_coast_cycles, &min_hits))
+    float iou_threshold = 0.3;
+
+    if (!PyArg_ParseTuple(args, "|iif", &max_coast_cycles, &min_hits, &iou_threshold))
     {
         return -1;
     }
-    self->tracker = new Tracker(max_coast_cycles);
+    self->tracker = new Tracker(max_coast_cycles, iou_threshold);
     self->kMinHits = min_hits;
     return 0;
 }

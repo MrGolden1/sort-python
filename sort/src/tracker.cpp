@@ -5,9 +5,10 @@ Tracker::Tracker() {
     id_ = 0;
 }
 
-Tracker::Tracker(int max_coast_cycles) {
+Tracker::Tracker(int max_coast_cycles, float iou_threshold) {
     id_ = 0;
     max_coast_cycles_ = max_coast_cycles;
+    iou_threshold_ = iou_threshold;
 }
 
 float Tracker::CalculateIou(const cv::Rect& det, const Track& track) {
@@ -80,12 +81,10 @@ void Tracker::HungarianMatching(const std::vector<std::vector<float>>& iou_matri
     }
 }
 
-
 void Tracker::AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detection,
                                             std::map<int, Track>& tracks,
                                             std::map<int, cv::Rect>& matched,
-                                            std::vector<cv::Rect>& unmatched_det,
-                                            float iou_threshold) {
+                                            std::vector<cv::Rect>& unmatched_det) {
 
     // Set all detection as unmatched if no tracks existing
     if (tracks.empty()) {
@@ -122,7 +121,7 @@ void Tracker::AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detecti
         for (const auto& trk : tracks) {
             if (0 == association[i][j]) {
                 // Filter out matched with low IOU
-                if (iou_matrix[i][j] >= iou_threshold) {
+                if (iou_matrix[i][j] >= iou_threshold_) {
                     matched[trk.first] = detection[i];
                     matched_flag = true;
                 }
