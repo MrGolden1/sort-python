@@ -84,7 +84,8 @@ void Tracker::HungarianMatching(const std::vector<std::vector<float>>& iou_matri
 void Tracker::AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detection,
                                             std::map<int, Track>& tracks,
                                             std::map<int, cv::Rect>& matched,
-                                            std::vector<cv::Rect>& unmatched_det) {
+                                            std::vector<cv::Rect>& unmatched_det,
+                                            float iou_threshold) {
 
     // Set all detection as unmatched if no tracks existing
     if (tracks.empty()) {
@@ -121,7 +122,7 @@ void Tracker::AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detecti
         for (const auto& trk : tracks) {
             if (0 == association[i][j]) {
                 // Filter out matched with low IOU
-                if (iou_matrix[i][j] >= iou_threshold_) {
+                if (iou_matrix[i][j] >= iou_threshold) {
                     matched[trk.first] = detection[i];
                     matched_flag = true;
                 }
@@ -152,7 +153,7 @@ void Tracker::Run(const std::vector<cv::Rect>& detections) {
 
     // return values - matched, unmatched_det
     if (!detections.empty()) {
-        AssociateDetectionsToTrackers(detections, tracks_, matched, unmatched_det);
+        AssociateDetectionsToTrackers(detections, tracks_, matched, unmatched_det, iou_threshold_);
     }
 
     /*** Update tracks with associated bbox ***/
