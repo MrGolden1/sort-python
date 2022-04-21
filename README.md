@@ -34,9 +34,9 @@ $ pip install .
     
 ```python
 import sort
-# Create a tracker with max_coast_cycles = 5 and min_hits = 3
-# Default values are max_coast_cycles = 3 and min_hits = 1
-tracker = sort.SORT(5,3)
+# Create a tracker with max_age = 5, min_hits = 3 and iou_threshold = 0.2
+# Default values are max_age = 3, min_hits = 1 and iou_threshold = 0.3
+tracker = sort.SORT(max_age=5, min_hits=3, iou_threshold=0.2)
 ```
 
 ## Methods:

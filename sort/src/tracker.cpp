@@ -5,9 +5,9 @@ Tracker::Tracker() {
     id_ = 0;
 }
 
-Tracker::Tracker(int max_coast_cycles, float iou_threshold) {
+Tracker::Tracker(int max_age, float iou_threshold) {
     id_ = 0;
-    max_coast_cycles_ = max_coast_cycles;
+    max_age_ = max_age;
     iou_threshold_ = iou_threshold;
 }
 
@@ -172,7 +172,7 @@ void Tracker::Run(const std::vector<cv::Rect>& detections) {
 
     /*** Delete lose tracked tracks ***/
     for (auto it = tracks_.begin(); it != tracks_.end();) {
-        if (it->second.coast_cycles_ > max_coast_cycles_) {
+        if (it->second.coast_cycles_ > max_age_) {
             it = tracks_.erase(it);
         } else {
             it++;
