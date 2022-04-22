@@ -10,7 +10,7 @@
 class Tracker {
 public:
     Tracker();
-    Tracker(int max_coast_cycles);
+    Tracker(int max_age, float iou_threshold);
     ~Tracker() = default;
 
     static float CalculateIou(const cv::Rect& det, const Track& track);
@@ -46,5 +46,6 @@ private:
 
     // Assigned ID for each bounding box
     int id_;
-    int max_coast_cycles_;
+    int max_age_;
+    float iou_threshold_;
 };

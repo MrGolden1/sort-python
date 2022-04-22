@@ -87,14 +87,32 @@ static PyObject *Py_SORT_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 
 static int Py_SORT_init(Py_SORT *self, PyObject *args, PyObject *kwds)
 {
-    int max_coast_cycles = 3;
+    int max_age = 3;
     int min_hits = 1;
-    
-    if (!PyArg_ParseTuple(args, "|ii", &max_coast_cycles, &min_hits))
+    float iou_threshold = 0.3;
+
+    // parameters are optional
+    // get from kwds
+    if (kwds)
     {
-        return -1;
+        PyObject *max_age_obj = PyDict_GetItemString(kwds, "max_age");
+        if (max_age_obj)
+        {
+            max_age = PyLong_AsLong(max_age_obj);
+        }
+        PyObject *min_hits_obj = PyDict_GetItemString(kwds, "min_hits");
+        if (min_hits_obj)
+        {
+            min_hits = PyLong_AsLong(min_hits_obj);
+        }
+        PyObject *iou_threshold_obj = PyDict_GetItemString(kwds, "iou_threshold");
+        if (iou_threshold_obj)
+        {
+            iou_threshold = (float)PyFloat_AsDouble(iou_threshold_obj);
+        }
     }
-    self->tracker = new Tracker(max_coast_cycles);
+
+    self->tracker = new Tracker(max_age, iou_threshold);
     self->kMinHits = min_hits;
     return 0;
 }

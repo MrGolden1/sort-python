@@ -5,9 +5,10 @@ Tracker::Tracker() {
     id_ = 0;
 }
 
-Tracker::Tracker(int max_coast_cycles) {
+Tracker::Tracker(int max_age, float iou_threshold) {
     id_ = 0;
-    max_coast_cycles_ = max_coast_cycles;
+    max_age_ = max_age;
+    iou_threshold_ = iou_threshold;
 }
 
 float Tracker::CalculateIou(const cv::Rect& det, const Track& track) {
@@ -79,7 +80,6 @@ void Tracker::HungarianMatching(const std::vector<std::vector<float>>& iou_matri
         }
     }
 }
-
 
 void Tracker::AssociateDetectionsToTrackers(const std::vector<cv::Rect>& detection,
                                             std::map<int, Track>& tracks,
@@ -153,7 +153,7 @@ void Tracker::Run(const std::vector<cv::Rect>& detections) {
 
     // return values - matched, unmatched_det
     if (!detections.empty()) {
-        AssociateDetectionsToTrackers(detections, tracks_, matched, unmatched_det);
+        AssociateDetectionsToTrackers(detections, tracks_, matched, unmatched_det, iou_threshold_);
     }
 
     /*** Update tracks with associated bbox ***/
@@ -172,7 +172,7 @@ void Tracker::Run(const std::vector<cv::Rect>& detections) {
 
     /*** Delete lose tracked tracks ***/
     for (auto it = tracks_.begin(); it != tracks_.end();) {
-        if (it->second.coast_cycles_ > max_coast_cycles_) {
+        if (it->second.coast_cycles_ > max_age_) {
             it = tracks_.erase(it);
         } else {
             it++;
