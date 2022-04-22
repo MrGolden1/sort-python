@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 _skbuild
+scripts.txt
