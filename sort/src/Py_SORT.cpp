@@ -190,10 +190,12 @@ static PyObject *Py_SORT_run(Py_SORT *self, PyObject *args)
             height = *indices++;
             break;
         case 1: // [xcenter, ycenter, w, h]
-            xmin = *indices++ - width / 2;
-            ymin = *indices++ - height / 2;
+            xmin = *indices++;
+            ymin = *indices++;
             width = *indices++;
             height = *indices++;
+            xmin -= width / 2;
+            ymin -= height / 2;
             break;
         case 2: // [xmin, ymin, xmax, ymax]
             xmin = *indices++;
