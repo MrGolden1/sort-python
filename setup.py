@@ -2,7 +2,7 @@ from skbuild import setup
 
 setup(
     name="sort-tracker",
-    version="1.0.6",
+    version="1.0.7",
     description="SORT tracker",
     author='M.Ali Zarrinzade',
     author_email="ali.zarrinzadeh@gmail.com",
