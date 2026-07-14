@@ -82,6 +82,3 @@ tracks = tracker.get_tracks(0)
 
 ![demo](demo.gif)
 
-`Author: MrGolden1`
-
-`Email: ali.zarrinzadeh@gmail.com`
